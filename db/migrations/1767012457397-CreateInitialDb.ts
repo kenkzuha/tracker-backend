@@ -15,10 +15,6 @@ export class CreateInitialDb1767012457397 implements MigrationInterface {
                         generationStrategy: 'increment',
                     },
                     {
-                        name: 'name',
-                        type: 'varchar',
-                    },
-                    {
                         name: 'email',
                         type: 'varchar',
                     },
