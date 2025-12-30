@@ -17,7 +17,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "premigrate": "tsc -p tsconfig.db.json",
+    "migrate": "typeorm migration:run -d src/datasource.ts",
+    "migrate:revert": "typeorm migration:revert -d src/datasource.ts"
   },
   "dependencies": {
     "@fastify/helmet": "^13.0.2",
@@ -25,9 +28,12 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/platform-fastify": "^11.1.10",
+    "@nestjs/typeorm": "^11.0.0",
     "fastify": "^5.6.2",
+    "mysql2": "^3.16.0",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "typeorm": "^0.3.28"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
