@@ -19,6 +19,10 @@ export class CreateInitialDb1767012457397 implements MigrationInterface {
                         type: 'varchar',
                     },
                     {
+                        name: 'name',
+                        type: 'varchar',
+                    },
+                    {
                         name: 'password',
                         type: 'varchar',
                     },
