@@ -1,6 +1,8 @@
 import { DataSource } from 'typeorm';
-import { User } from './users/users.entity';
 import * as dotenv from 'dotenv'
+import { UserEntity } from './entities/users.entity';
+import { PortfolioEntity } from './entities/portfolio.entity';
+import { AssetEntity } from './entities/asset.entity';
 
 dotenv.config()
 
@@ -9,6 +11,7 @@ export const AppDataSource = new DataSource({
   url: process.env.DATABASE_URL,
   migrations: ['src/migrations/*.ts'],
   ssl: true,
+  entities: [UserEntity, PortfolioEntity, AssetEntity],
 });
 
 AppDataSource.initialize()
