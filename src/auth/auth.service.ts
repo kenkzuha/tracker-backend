@@ -47,7 +47,7 @@ export class AuthService {
     const isMatch = await bcrypt.compare(dto.password, user.password);
 
     if (!isMatch){
-      throw new NotFoundException('Invalid Credentials');
+      throw new UnauthorizedException('Invalid Credentials');
     } else {
       const { password, ...result} = user;
       const payload = { sub: user.id, username: user.username };
