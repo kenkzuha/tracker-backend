@@ -1,12 +1,13 @@
-import { Controller, Get, Post, Delete, Patch, Param, Body, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Patch, Param, Body, Req, Query, UseGuards } from '@nestjs/common';
 import { PortfolioService } from './portfolio.service';
 import { CreatePortfolioDto, AddAssetDto, UpdateAssetDto } from 'src/dto/portfolio.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { SnapshotService } from './snapshot.service';
 
 @UseGuards(AuthGuard)
 @Controller('portfolio')
 export class PortfolioController {
-  constructor(private readonly portfolioService: PortfolioService){}
+  constructor(private readonly portfolioService: PortfolioService, private readonly snapshotService: SnapshotService){}
 
   @Get()
   getAllPortfolio(@Req() req: any){
@@ -43,5 +44,17 @@ export class PortfolioController {
     return this.portfolioService.deleteAsset(assetId, req.user.sub);
   }
 
+  @Post(':id/snapshot')
+  saveSnapshot(@Param('id') id: string){
+    return this.snapshotService.saveSnapshot(id);
+  }
+
+  @Get(':id/snapshots')
+  getSnapshots(
+    @Param('id') id: string,
+    @Query('range') range: string = '1M'
+  ){
+    return this.snapshotService.getSnapshots(id, range);
+  }
 
 }

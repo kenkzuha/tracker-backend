@@ -3,6 +3,7 @@ import { PortfolioController } from './portfolio.controller';
 import { PortfolioService } from './portfolio.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { JwtService } from '@nestjs/jwt';
+import { SnapshotService } from './snapshot.service';
 
 describe('PortfolioController', () => {
   let controller: PortfolioController;
@@ -31,6 +32,14 @@ describe('PortfolioController', () => {
           provide: JwtService,
           useValue: { verifyAsync: jest.fn() }, 
         },
+        {
+          provide: SnapshotService,
+          useValue: {
+            saveSnapshot: jest.fn(),
+            getSnapshots: jest.fn(),
+            saveAllSnapshots: jest.fn()
+          }
+        }
       ],
     }).compile();
 
